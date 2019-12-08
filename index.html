@@ -43,7 +43,7 @@
     	// You will need to update this query with the city, weather format (Celsius or Fahrenheit) and your OpenWeatherMap ID
     	 
     	// Right now I have it set to Chicago.  The default should be Ann Abor/Fahreheit.
-    	let CityNameFixed = (CityName as NSString).stringByReplacingOccurrencesOfString(" ", withString: "+");
+    	let CityNameFixed = CityName.stringByReplacingOccurrencesOfString(" ", withString: "+");
     	var YourWeatherAppID = "adf875f2a051308483a5fbd53f7f26a7";
 		let currentquery = "http://api.openweathermap.org/data/2.5/weather?q="+ CityNameFixed + "&units=" + unit + "&APPID=" +YourWeatherAppID;
 		let dailyquery = "http://api.openweathermap.org/data/2.5/forecast/daily?id=" + CityNameFixed + "&units=" + unit + "&APPID=" +YourWeatherAppID;
