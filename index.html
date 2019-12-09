@@ -44,14 +44,14 @@
     	// Right now I have it set to Chicago.  The default should be Ann Abor/Fahreheit.
     	let cityNameFixed = cityName.replace(" ", "+");
     	var YourWeatherAppID = "adf875f2a051308483a5fbd53f7f26a7";
-		let currentquery = "http://api.openweathermap.org/data/2.5/weather?q="+ cityNameFixed + "&units=" + unit + "&APPID=" +YourWeatherAppID;
-		let dailyquery = "http://api.openweathermap.org/data/2.5/forecast/daily?id=" + cityNameFixed + "&units=" + unit + "&APPID=" +YourWeatherAppID;
+		let currentquery = "https://api.openweathermap.org/data/2.5/weather?q="+ cityNameFixed + "&units=" + unit + "&APPID=" +YourWeatherAppID;
+		let dailyquery = "https://api.openweathermap.org/data/2.5/forecast/daily?id=" + cityNameFixed + "&units=" + unit + "&APPID=" +YourWeatherAppID;
         console.log("Query is :" + currentquery)
 
         $.getJSON(currentquery,function(json){
             console.log(JSON.stringify(json));
             $("#forecast").attr('style', 'display: block;'); 
-            let iconQuery = "http://openweathermap.org/img/wn/"+json.weather[0].icon+"@2x.png"
+            let iconQuery = "https://openweathermap.org/img/wn/"+json.weather[0].icon+"@2x.png"
             $("#tempImg").attr('src', iconQuery); 
             $("#loc").text(json.weather.name); 
             $("#temp").text(json.main.temp); 
