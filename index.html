@@ -25,42 +25,40 @@
 <script>
     function gettingJSON(){
     	console.log("Hi")
-    	var CityName = "Ann Arbor";
+    	var cityName = "Ann Arbor";
     	// Use the OpenWeather API to return:
     	//  the current temperature 
     	//  the high temperature for the day
     	//  the low temperature for the day
     	//  the icon for the current weather.
     	if ($("#location").val().length > 0){
-    		var Cityname = $("#location").val()
+    		var cityName = $("#location").val()
     	}
     	var unit = 'metric'
-    	var fahrenheitchecked = $('#fahrenheit').checked;
-    	var celciuschecked = $('#celcius').checked;
-    	if (fahrenheitchecked) {
-    		var unit = 'imperial'
+    	var fahrenheitchecked = ($('#fahrenheit').is(":checked"));
+    	if (fahrenheitchecked == true) {
+    		var unit = 'imperial';
     	}
     	// You will need to update this query with the city, weather format (Celsius or Fahrenheit) and your OpenWeatherMap ID
     	 
     	// Right now I have it set to Chicago.  The default should be Ann Abor/Fahreheit.
-    	let CityNameFixed = CityName.stringByReplacingOccurrencesOfString(" ", withString: "+");
+    	let cityNameFixed = cityName.replace(" ", "+");
     	var YourWeatherAppID = "adf875f2a051308483a5fbd53f7f26a7";
-		let currentquery = "http://api.openweathermap.org/data/2.5/weather?q="+ CityNameFixed + "&units=" + unit + "&APPID=" +YourWeatherAppID;
-		let dailyquery = "http://api.openweathermap.org/data/2.5/forecast/daily?id=" + CityNameFixed + "&units=" + unit + "&APPID=" +YourWeatherAppID;
-        console.log("Query is :" + query)
+		let currentquery = "http://api.openweathermap.org/data/2.5/weather?q="+ cityNameFixed + "&units=" + unit + "&APPID=" +YourWeatherAppID;
+		let dailyquery = "http://api.openweathermap.org/data/2.5/forecast/daily?id=" + cityNameFixed + "&units=" + unit + "&APPID=" +YourWeatherAppID;
+        console.log("Query is :" + currentquery)
 
         $.getJSON(currentquery,function(json){
             console.log(JSON.stringify(json));
-            let iconQuery = "http://openweathermap.org/img/wn/"+json.weather.icon+"@2x.png"
+            $("#forecast").attr('style', 'display: block;'); 
+            let iconQuery = "http://openweathermap.org/img/wn/"+json.weather[0].icon+"@2x.png"
             $("#tempImg").attr('src', iconQuery); 
             $("#loc").text(json.weather.name); 
-            $("#temp").text(json.main.temp.toString); 
-            $("#forecast").attr('style', 'display: block;'); 
+            $("#temp").text(json.main.temp); 
+            $("#high").text(json.main.temp_min); 
+            $("#low").text(json.main.temp_max); 
+            
     })
-        $.getJSON(dailyquery,function(json){
-        	$("#high").text(json.list[0].temp.max.toString); 
-            $("#low").text(json.list[0].temp.min.toString); 
-        })
     }
     </script>
 </head>
