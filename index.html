@@ -34,10 +34,10 @@
     	if ($("#location").val().length > 0){
     		var cityName = $("#location").val()
     	}
-    	var unit = 'metric'
-    	var fahrenheitchecked = ($('#fahrenheit').is(":checked"));
+    	var unit = 'imperial'
+    	var fahrenheitchecked = ($('#celcius').is(":checked"));
     	if (fahrenheitchecked == true) {
-    		var unit = 'imperial';
+    		var unit = 'metric';
     	}
     	// You will need to update this query with the city, weather format (Celsius or Fahrenheit) and your OpenWeatherMap ID
     	 
